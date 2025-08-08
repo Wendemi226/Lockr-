@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lockré - Application de Gestion des Ventes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <i class="fas fa-store"></i>
+                    <span>Lockré</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#dashboard" class="nav-link active">Tableau de bord</a>
+                    <a href="#sales" class="nav-link">Ventes</a>
+                    <a href="#products" class="nav-link">Produits</a>
+                    <a href="#reports" class="nav-link">Rapports</a>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div id="login-section" class="section active">
+                <div class="login-container">
+                    <div class="login-card">
+                        <div class="login-header">
+                            <i class="fas fa-store"></i>
+                            <h2>Bienvenue sur Lockré</h2>
+                            <p>Application de gestion des ventes</p>
+                        </div>
+                        <form id="login-form">
+                            <div class="form-group">
+                                <label for="username">Nom d'utilisateur</label>
+                                <input type="text" id="username" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Mot de passe</label>
+                                <input type="password" id="password" name="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-sign-in-alt"></i> Connexion
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dashboard-section" class="section">
+                <div class="dashboard-container">
+                    <div class="dashboard-header">
+                        <h1>Tableau de bord</h1>
+                        <div class="user-info">
+                            <span id="user-name">Utilisateur</span>
+                            <button id="logout-btn" class="btn btn-secondary">
+                                <i class="fas fa-sign-out-alt"></i> Déconnexion
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3 id="total-sales">0</h3>
+                            <p>Ventes aujourd'hui</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-dollar-sign"></i>
+                            <h3 id="total-revenue">0 FCFA</h3>
+                            <p>Revenu du jour</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-box"></i>
+                            <h3 id="total-products">0</h3>
+                            <p>Produits en stock</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-users"></i>
+                            <h3 id="total-vendors">0</h3>
+                            <p>Vendeurs actifs</p>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h2>Activités récentes</h2>
+                        <div id="recent-sales" class="activity-list">
+                            <p class="empty-state">Aucune activité récente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
