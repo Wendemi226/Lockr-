@@ -3,18 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lockré - Application de Gestion des Ventes</title>
-    <link rel="stylesheet" href="src/styles/app.css">
+    <title>Lockré - Gestion des Ventes</title>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div id="app"></div>
-    
-    <!-- Application Scripts -->
-    <script src="src/database/DatabaseManager.js"></script>
-    <script src="src/components/LoginComponent.js"></script>
-    <script src="src/components/AdminDashboard.js"></script>
-    <script src="src/app.js"></script>
+    <div id="app">
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen active">
+            <div class="login-container">
+                <div class="login-card">
+                    <div class="login-header">
+                        <i class="fas fa-store"></i>
+                        <h1>Lockré</h1>
+                        <p>Gestion des ventes et des stocks</p>
+                    </div>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="username">Nom d'utilisateur</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i> Connexion
+                        </button>
+                    </form>
+                    <div class="demo-credentials">
+                        <p><strong>Demo:</strong></p>
+                        <p>Admin: admin / admin123</p>
+                        <p>Vendeur: vendeur / vendeur123</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Screen -->
+        <div id="dashboard-screen" class="screen">
+            <header class="app-header">
+                <div class="header-left">
+                    <h1><i class="fas fa-store"></i> Lockré</h1>
+                </div>
+                <div class="header-right">
+                    <span id="user-info">Utilisateur</span>
+                    <button id="logout-btn" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </button>
+                </div>
+            </header>
+
+            <nav class="app-nav">
+                <button class="nav-btn active" data-section="overview">
+                    <i class="fas fa-chart-pie"></i> Vue d'ensemble
+                </button>
+                <button class="nav-btn" data-section="sales">
+                    <i class="fas fa-shopping-cart"></i> Ventes
+                </button>
+                <button class="nav-btn" data-section="products">
+                    <i class="fas fa-box"></i> Produits
+                </button>
+                <button class="nav-btn" data-section="reports">
+                    <i class="fas fa-chart-bar"></i> Rapports
+                </button>
+            </nav>
+
+            <main class="app-main">
+                <!-- Overview Section -->
+                <section id="overview-section" class="section active">
+                    <h2>Vue d'ensemble</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3 id="total-sales">0</h3>
+                            <p>Ventes aujourd'hui</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-dollar-sign"></i>
+                            <h3 id="total-revenue">0 FCFA</h3>
+                            <p>Revenu du jour</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-box"></i>
+                            <h3 id="total-products">0</h3>
+                            <p>Produits</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-users"></i>
+                            <h3 id="total-customers">0</h3>
+                            <p>Clients</p>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h3>Activités récentes</h3>
+                        <div id="recent-sales-list">
+                            <p class="empty-state">Aucune activité récente</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sales Section -->
+                <section id="sales-section" class="section">
+                    <h2>Gestion des ventes</h2>
+                    <div class="section-header">
+                        <button id="add-sale-btn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Nouvelle vente
+                        </button>
+                    </div>
+                    <div id="sales-list">
+                        <p class="empty-state">Aucune vente enregistrée</p>
+                    </div>
+                </section>
+
+                <!-- Products Section -->
+                <section id="products-section" class="section">
+                    <h2>Gestion des produits</h2>
+                    <div class="section-header">
+                        <button id="add-product-btn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Ajouter produit
+                        </button>
+                    </div>
+                    <div id="products-list">
+                        <p class="empty-state">Aucun produit enregistré</p>
+                    </div>
+                </section>
+
+                <!-- Reports Section -->
+                <section id="reports-section" class="section">
+                    <h2>Rapports</h2>
+                    <div class="reports-container">
+                        <div class="report-card">
+                            <h3>Rapport quotidien</h3>
+                            <div id="daily-report">
+                                <p>Chargement...</p>
+                            </div>
+                        </div>
+                        <div class="report-card">
+                            <h3>Rapport mensuel</h3>
+                            <div id="monthly-report">
+                                <p>Chargement...</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Modals -->
+        <div id="sale-modal" class="modal">
+            <div class="modal-content">
+                <h3>Nouvelle vente</h3>
+                <form id="sale-form">
+                    <div class="form-group">
+                        <label for="sale-product">Produit</label>
+                        <select id="sale-product" required>
+                            <option value="">Sélectionner un produit</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sale-quantity">Quantité</label>
+                        <input type="number" id="sale-quantity" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sale-price">Prix unitaire (FCFA)</label>
+                        <input type="number" id="sale-price" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sale-customer">Client</label>
+                        <input type="text" id="sale-customer" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('sale-modal')">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="product-modal" class="modal">
+            <div class="modal-content">
+                <h3>Ajouter produit</h3>
+                <form id="product-form">
+                    <div class="form-group">
+                        <label for="product-name">Nom du produit</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-price">Prix (FCFA)</label>
+                        <input type="number" id="product-price" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-stock">Stock initial</label>
+                        <input type="number" id="product-stock" min="0" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('product-modal')">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
